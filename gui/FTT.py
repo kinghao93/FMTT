@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import sys,os
 import subprocess
-from PyQt4.QtGui import QMainWindow, QSizePolicy, QWidget, QVBoxLayout, QAction, \
+from PyQt4.QtGui import QMainWindow, QDesktopWidget, QSizePolicy, QWidget, QVBoxLayout, QAction, \
     QKeySequence, QLabel, QItemSelectionModel, QMessageBox, QFileDialog, QFrame, \
     QDockWidget, QProgressBar, QProgressDialog
 from PyQt4.QtCore import QString, QStringList, SIGNAL, QSettings, QSize, QPoint, QVariant, QFileInfo, QTimer, pyqtSignal, QObject
@@ -22,10 +22,17 @@ class MainWindow(QMainWindow):
         # Show the UI.  It is important that this comes *after* the above
         # adding of custom widgets, especially the central widget.  Otherwise the
         # dock widgets would be far to large.
+        self.center()
         self.ui.show()
 
         ## connect action signals
         self.connectActions()
+
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
 
     def connectActions(self):
         self.ui.btn_start.clicked.connect(self.slots_btn_start_train)
