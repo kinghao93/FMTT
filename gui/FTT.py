@@ -18,6 +18,10 @@ class MainWindow(QMainWindow):
         self.ui = uic.loadUi(os.path.join('./gui/', "ftt.ui"), self)
 
         self.ui.cbb_weights.addItems(QStringList(['vgg16.ckpt',]))
+        # self.ui.gv_image
+        self.ui.le_img_index.setText('0')
+        self.ui.le_img_number.setText('0')
+        self.ui.le_faster_number.setText('0')
         # self.ui.cbb_weights.addItem(QString('vgg16.ckpt1'))
         # Show the UI.  It is important that this comes *after* the above
         # adding of custom widgets, especially the central widget.  Otherwise the
@@ -41,7 +45,11 @@ class MainWindow(QMainWindow):
         self.ui.btn_add_detect_model.clicked.connect(self.slots_btn_add_detect_model)
         self.ui.btn_detect_read_path.clicked.connect(self.slots_btn_detect_read_path)
         self.ui.btn_detect_save_path.clicked.connect(self.slots_btn_detect_save_path)
+        self.ui.btn_detect_save_img_path.clicked.connect(self.slots_btn_detect_save_img_path)
         self.ui.btn_start_detect.clicked.connect(self.slots_btn_start_detect)
+        self.ui.btn_open_json_file.clicked.connect(self.slots_btn_open_json_file)
+
+
         pass
 
     # slots
@@ -63,7 +71,12 @@ class MainWindow(QMainWindow):
 
     #
     def slots_btn_start_detect(self):
-        # os.system('. /home/wanghao/tensorflow/bin/activate')
+        model = str(self.ui.cbb_detect_model.currentText())
+        data_path = str(self.ui.le_detect_read_path.text())
+        save_json_path = str(self.ui.le_detect_save_path.text())
+        save_imgs_path = str(self.ui.le_detect_save_img_path.text())
+        print('model', model, '\ndata_path', data_path,\
+            '\nsave_json_path', save_json_path, '\nsave_imgs_path', save_imgs_path)
         os.system('cd /home/wanghao/tf-faster-rcnn \n pwd')
         os.system('pwd')
         pass
@@ -77,6 +90,19 @@ class MainWindow(QMainWindow):
         read_path = QFileDialog.getExistingDirectory(self)
         self.ui.le_detect_read_path.setText(read_path)
 
+    def slots_btn_detect_save_img_path(self):
+        save_img_path = QFileDialog.getExistingDirectory(self)
+        self.ui.le_detect_save_img_path.setText(save_img_path)
+
     def slots_btn_detect_save_path(self):
-        save_path = QFileDialog.getExistingDirectory(self)
+        save_path = QFileDialog.getSaveFileName(self, 'save file', \
+                    "faster.json" , "json files (*.json);;all files(*.*)")
         self.ui.le_detect_save_path.setText(save_path)
+
+    def slots_btn_open_json_file(self):
+        path = self.ui.le_detect_save_path.text()
+
+        if os.path.exists(path):
+            os.system('nautilus ' + str(path))
+        else:
+            QMessageBox.information(self, 'tips', 'file not found!')
