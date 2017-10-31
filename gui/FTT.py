@@ -41,7 +41,7 @@ class MainWindow(QMainWindow):
         self.ui.btn_add_detect_model.clicked.connect(self.slots_btn_add_detect_model)
         self.ui.btn_detect_read_path.clicked.connect(self.slots_btn_detect_read_path)
         self.ui.btn_detect_save_path.clicked.connect(self.slots_btn_detect_save_path)
-
+        self.ui.btn_start_detect.clicked.connect(self.slots_btn_start_detect)
         pass
 
     # slots
@@ -63,11 +63,15 @@ class MainWindow(QMainWindow):
 
     #
     def slots_btn_start_detect(self):
-
+        # os.system('. /home/wanghao/tensorflow/bin/activate')
+        os.system('cd /home/wanghao/tf-faster-rcnn \n pwd')
+        os.system('pwd')
         pass
     def slots_btn_add_detect_model(self):
         fileName = QFileDialog.getOpenFileName(self, u'add detect model',
-                                               u'.', ur'DL model(*.ckpt);')
+                                               u'.', u'DL model(*.ckpt.index);;')
+        print(fileName)
+        # self.ui.cbb_detect_model.addItem(QString('vgg16.ckpt'))
         self.ui.cbb_detect_model.addItem(fileName)
     def slots_btn_detect_read_path(self):
         read_path = QFileDialog.getExistingDirectory(self)
