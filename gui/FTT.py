@@ -37,6 +37,11 @@ class MainWindow(QMainWindow):
     def connectActions(self):
         self.ui.btn_start.clicked.connect(self.slots_btn_start_train)
         self.ui.btn_reset.clicked.connect(self.slots_btn_reset_train)
+        # detect page
+        self.ui.btn_add_detect_model.clicked.connect(self.slots_btn_add_detect_model)
+        self.ui.btn_detect_read_path.clicked.connect(self.slots_btn_detect_read_path)
+        self.ui.btn_detect_save_path.clicked.connect(self.slots_btn_detect_save_path)
+
         pass
 
     # slots
@@ -55,3 +60,19 @@ class MainWindow(QMainWindow):
     def slots_btn_reset_train(self):
         self.ui.textEdit.clear()
         self.ui.progressBar.setValue(0)
+
+    #
+    def slots_btn_start_detect(self):
+
+        pass
+    def slots_btn_add_detect_model(self):
+        fileName = QFileDialog.getOpenFileName(self, u'add detect model',
+                                               u'.', ur'DL model(*.ckpt);')
+        self.ui.cbb_detect_model.addItem(fileName)
+    def slots_btn_detect_read_path(self):
+        read_path = QFileDialog.getExistingDirectory(self)
+        self.ui.le_detect_read_path.setText(read_path)
+
+    def slots_btn_detect_save_path(self):
+        save_path = QFileDialog.getExistingDirectory(self)
+        self.ui.le_detect_save_path.setText(save_path)

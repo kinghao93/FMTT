@@ -82,7 +82,78 @@
        <attribute name="title">
         <string>异常检测</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_4"/>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>异常扣件存储位置</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="le_detect_save_path"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="btn_start_detect">
+          <property name="text">
+           <string>开始检测</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QGraphicsView" name="gv_image"/>
+        </item>
+        <item row="0" column="1">
+         <widget class="QComboBox" name="cbb_detect_model"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>待检测扣件数据</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="le_detect_read_path"/>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>检测模型选择</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="btn_add_detect_model">
+          <property name="text">
+           <string>添加</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="btn_detect_read_path">
+          <property name="text">
+           <string>打开</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="btn_detect_save_path">
+          <property name="text">
+           <string>打开</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
